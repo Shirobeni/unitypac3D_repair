@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 4c8cc0c24874c544ca43d901b08ecefb
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Sephora
+  fontNames:
+  - Sephora
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: aaa4ee8a04543f740a8c426cacbf60c7, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
