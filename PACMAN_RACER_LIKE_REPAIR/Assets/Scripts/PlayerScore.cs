@@ -6,20 +6,18 @@ using TMPro;
 
 public class PlayerScore : MonoBehaviour
 {
-    private int score;
-    //private GameObject textObject;
-    //public TextMeshProUGUI scoreText;
+    private static int score;
     public TextMeshPro scoreText;
     // Start is called before the first frame update
     void Start()
     {
-        //this.scoreText = this.GetComponent<TextMeshProUGUI>();
         score = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        this.scoreText = this.GetComponent<TextMeshPro>();
         //textObject = GameObject.FindWithTag("1pScore");
         scoreText.text = ""+score;
     } 

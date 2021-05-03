@@ -1,10 +1,11 @@
 fileFormatVersion: 2
 guid: 197d4c36b7e481d4781d6b784de64ce6
-timeCreated: 1600120210
-licenseType: Free
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - esaS: {fileID: 11400000, guid: 6d582632e2a64af409a32546aa8d89c9, type: 2}
+  - itemS: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

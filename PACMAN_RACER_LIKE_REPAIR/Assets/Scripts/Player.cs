@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    private float speed = 2.0f;
+    private float speed = 3.0f;
     private Vector3 velocity;
     private Vector3 playerpos;
     private GameObject esa;
@@ -38,11 +38,11 @@ public class Player : MonoBehaviour {
         }
         else if (((Input.GetKey(KeyCode.X)) && (Input.GetKey(KeyCode.J))) || (Input.GetKey(KeyCode.LeftArrow)))
         {
-            transform.Rotate(new Vector3(0, -17, 0));
+            transform.Rotate(new Vector3(0, -20, 0));
         }
         else if (((Input.GetKey(KeyCode.S)) && (Input.GetKey(KeyCode.N))) ||(Input.GetKey(KeyCode.RightArrow)))
         {
-            transform.Rotate(new Vector3(0, 17, 0));
+            transform.Rotate(new Vector3(0, 20, 0));
         }
         //velocity = velocity.normalized * (speed * 2) * Time.deltaTime;
 
@@ -78,14 +78,6 @@ public class Player : MonoBehaviour {
             Instantiate(playerMiss, transform.position,transform.rotation);
         }
     }
-    /*void OnTriggerEnter(Collider collision)
-    {
-        if ((collision.gameObject.tag == "Enemy") && (this.gameObject.tag == "Player"))
-        {
-            Destroy(gameObject);
-            Instantiate(playerMiss, transform.position, transform.rotation);
-        }
-    }*/
     IEnumerator awaken()
     {
         this.gameObject.tag = "PacMiss";

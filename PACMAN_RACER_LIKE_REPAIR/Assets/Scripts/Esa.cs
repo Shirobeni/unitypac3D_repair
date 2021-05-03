@@ -11,21 +11,18 @@ public class Esa : MonoBehaviour
     private GhostRed ghostRed;
     private GhostBlue ghostBlue;
     private GhostPink ghostPink;
+    private GameObject canvasObject;
     private GameObject score1p;
     private PlayerScore playerScoreScript;
     private GameObject score2p;
     private RivalScore rivalScoreScript;
+    public EsaS esaS;
     public ItemS itemS;
     // Use this for initialization
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        /*enemy = GameObject.FindWithTag("Enemy");
-        ghostRed = enemy.GetComponent<GhostRed>();
-        score1p = GameObject.FindWithTag("1pScore");
-        playerScoreScript = score1p.GetComponent<PlayerScore>();
-        score2p = GameObject.FindWithTag("2pScore");
-        rivalScoreScript = score2p.GetComponent<RivalScore>();*/
+        
     }
 
     // Update is called once per frame
@@ -58,12 +55,11 @@ public class Esa : MonoBehaviour
             {
                 if ((this.gameObject.tag == "Esa") || (this.gameObject.tag == "PowerEsa"))
                 {
-                    itemS.score = 1;
-                    playerScoreScript.scoreUp(itemS.score);
+                    Debug.Log("TouchEsa Player");
+                    playerScoreScript.scoreUp(esaS.score);
                 }
                 else if (this.gameObject.tag == "Item")
                 {
-                    itemS.score = 10;
                     playerScoreScript.scoreUp(itemS.score);
                 }
             }
@@ -71,16 +67,17 @@ public class Esa : MonoBehaviour
             {
                 if ((this.gameObject.tag == "Esa") || (this.gameObject.tag == "PowerEsa"))
                 {
-                    itemS.score = 1;
-                    rivalScoreScript.scoreUp(itemS.score);
+                    Debug.Log("TouchEsa Rival");
+                    rivalScoreScript.scoreUp(esaS.score);
                 }
                 else if (this.gameObject.tag == "Item")
                 {
-                    itemS.score = 10;
                     rivalScoreScript.scoreUp(itemS.score);
                 }
             }
+
         }
+        
     }
 
 }

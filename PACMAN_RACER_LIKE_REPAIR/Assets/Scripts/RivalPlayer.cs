@@ -42,55 +42,16 @@ public class RivalPlayer : MonoBehaviour
         StartCoroutine("awaken");
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
-        if ((SceneManager.GetActiveScene().name == "Stage1") || (SceneManager.GetActiveScene().name == "Stage2"))
+        if ((SceneManager.GetActiveScene().name == "Stage1") || (SceneManager.GetActiveScene().name == "Stage2") || (SceneManager.GetActiveScene().name == "Stage3"))
         {
             NewTarget();
-            Debug.Log("Start : " + nearEsa +  " esaPos:" + esaPos + "m_navMeshAgent.destination" + m_navMeshAgent.destination);
             m_navMeshAgent.autoBraking = false;
-            /*if (GameObject.FindWithTag("Enemy"))
-            {
-                enemy = GameObject.FindWithTag("Enemy");
-                enemyPos = enemy.transform.position;
-                distance = Vector3.Distance(playerPos, enemyPos);
-            }*/
-            /*if(navPointsObj.Length == 0)
-            {
-                return;
-            }*/
-            /*            if ((tracking) && (GameObject.FindWithTag("Enemy")))
-                        {
-                            if (distance > limitRange)
-                            {
-                                tracking = false;
-                            }
-                            Vector3 dir = playerPos - enemyPos;
-                            Vector3 pos = playerPos - dir * 1.0f;
-                            //GetNextPoint();
-                            //m_navMeshAgent.destination = esaPos;
-                            m_navMeshAgent.destination = pos;
-                        }
-                        else
-                        {
-                            if (distance < limitRange)
-                            {
-                                tracking = true;
-                            }
-                            //esa = GameObject.FindWithTag("Esa");
-                            esaPos = nearEsa.transform.position;
-                            m_navMeshAgent.destination = esaPos;
-                            /*if (!m_navMeshAgent.pathPending && m_navMeshAgent.remainingDistance < 1f)
-                            {
-                                GetNextPoint();
-                            }*/
-            //}
+            
         }
         else if ((SceneManager.GetActiveScene().name == "Clear") || (SceneManager.GetActiveScene().name == "StartStandby"))
         {
-            //m_navMeshAgent.enabled = false;
             rivalSet = GameObject.FindWithTag("RivalSet");
             rivalSetPos = rivalSet.transform.position;
-            //m_navMeshAgent.enabled = true;
-            //Debug.Log(rivalSetPos);
             m_navMeshAgent.SetDestination(rivalSetPos);
             rigidbody.velocity = m_navMeshAgent.desiredVelocity;
             m_navMeshAgent.autoBraking = false;
@@ -104,27 +65,16 @@ public class RivalPlayer : MonoBehaviour
         playerPos = this.transform.position;
         m_navMeshAgent.speed = moveSpeed;
         rigidbody.velocity = m_navMeshAgent.desiredVelocity;
-        if ((SceneManager.GetActiveScene().name == "Stage1") || (SceneManager.GetActiveScene().name == "Stage2"))
+        if ((SceneManager.GetActiveScene().name == "Stage1") || (SceneManager.GetActiveScene().name == "Stage2") || (SceneManager.GetActiveScene().name == "Stage3"))
         {
             searchTime += Time.deltaTime;
-            /*if (searchTime >= 0.3f)
-            {
-                nearEsa = searchTag(gameObject, "Esa");
-                searchTime = 0;
-            }*/
-
-            /*esa = GameObject.FindWithTag("Esa");
-            esaPos = esa.transform.position;*/
             if (GameObject.FindWithTag("Enemy"))
             {
                 enemy = GameObject.FindWithTag("Enemy");
                 enemyPos = enemy.transform.position;
                 distance = Vector3.Distance(playerPos, enemyPos);
             }
-            /*if(navPointsObj.Length == 0)
-            {
-                return;
-            }*/
+            
             if ((tracking)&&(GameObject.FindWithTag("Enemy")))
             {
                 if(distance > limitRange)
@@ -147,22 +97,14 @@ public class RivalPlayer : MonoBehaviour
                     searchTime = 0;
                     Debug.Log("Update : " + nearEsa + " esaPos:" + esaPos + "m_navMeshAgent.destination" + m_navMeshAgent.destination);
                 }
-
-                /*if (!m_navMeshAgent.pathPending && m_navMeshAgent.remainingDistance < 1f)
-                {
-                    GetNextPoint();
-                }*/
             }
 
 
         }
         else if ((SceneManager.GetActiveScene().name == "Clear")||(SceneManager.GetActiveScene().name == "StartStandby"))
         {
-            //m_navMeshAgent.enabled = false;
             rivalSet = GameObject.FindWithTag("RivalSet");
             rivalSetPos = rivalSet.transform.position;
-            //m_navMeshAgent.enabled = true;
-            //Debug.Log(rivalSetPos);
             m_navMeshAgent.SetDestination(rivalSetPos);
             rigidbody.velocity = m_navMeshAgent.desiredVelocity;
         }
@@ -213,19 +155,8 @@ public class RivalPlayer : MonoBehaviour
             Destroy(gameObject);
             Instantiate(rivalPlayerMiss, transform.position, transform.rotation);
         }
-        /*if (collision.gameObject.tag == "Esa")
-        {
-            Invoke("NewTarget", 0.05f);
-        }*/
+       
     }
-    /*void OnTriggerEnter(Collider collision)
-    {
-        if ((collision.gameObject.tag == "Enemy") && (this.gameObject.tag == "Player"))
-        {
-            Destroy(gameObject);
-            Instantiate(rivalPlayerMiss, transform.position, transform.rotation);
-        }
-    }*/
     void OnDrawGizmos()
     {
         if (m_navMeshAgent && m_navMeshAgent.enabled)
