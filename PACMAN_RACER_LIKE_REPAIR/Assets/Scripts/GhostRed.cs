@@ -6,8 +6,9 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 
-public class GhostRed : MonoBehaviour {
-    protected float speed = 7f;
+public class GhostRed : BaseGhost {
+    /*
+    protected float speed = 5f;
 
     private Vector3 enemypos;
     protected Rigidbody rigidbody;
@@ -26,10 +27,15 @@ public class GhostRed : MonoBehaviour {
     private new Collider collider;
 
     public GhostS ghostS;
+    */
+
+    public Transform[] navPointsObj;
 
     // Use this for initialization
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+        /*
         ghostS.limitRange = 30f;
         ghostS.quitRange = 40f;
         tracking = false;
@@ -37,24 +43,22 @@ public class GhostRed : MonoBehaviour {
         m_navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
         ijikeTime = 0f;
+        */
         GetNextPoint();
         m_navMeshAgent.autoBraking = false;
 
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         enemypos = this.transform.position;
         player = GameObject.FindWithTag("Player");
         playerPos = player.transform.position;
         distance = Vector3.Distance(enemypos,playerPos);
-        moveSpeed = speed;
-        m_navMeshAgent.speed = moveSpeed;
-        /*if (navPointsObj.Length == 0)
-        {
-            return;
-        }*/
+        //moveSpeed = speed;
+        //m_navMeshAgent.speed = moveSpeed;
         rigidbody.velocity = m_navMeshAgent.desiredVelocity;
         if (tracking)
         {
@@ -121,7 +125,7 @@ public class GhostRed : MonoBehaviour {
 
 
 
-    public void beIjike() {
+   /* public void beIjike() {
         ijikeTime = 0f;
         this.gameObject.layer = LayerMask.NameToLayer("Ijike");
         transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Ijike");
@@ -129,29 +133,12 @@ public class GhostRed : MonoBehaviour {
         ijike = true;
         this.gameObject.tag = "Ijike";
         transform.GetChild(0).gameObject.tag = "Ijike";
-        //ijikeTime += Time.deltaTime;
-        /*if(ijikeTime > 7.0f)
-        {
-            ijike = false;
-            gameObject.GetComponent<Renderer>().material.color = new Color(241f, 1f, 1f);
-        }*/
-        /*
-        Destroy(gameObject);
-        Instantiate(ijikeGhost, transform.position, transform.rotation);
-        */
-    }
-    void OnCollisionEnter(Collision collision)
+    }*/
+    /*void OnCollisionEnter(Collision collision)
     {
         if((collision.gameObject.tag == "Player")&&(this.gameObject.tag == "Ijike"))
         {
             speed = 0f;
-            StartCoroutine("Eaten");
-        }
-    }
-    /*void OnTriggerEnter(Collider collision)
-    {
-        if ((collision.gameObject.tag == "Player") && (this.gameObject.tag == "Ijike"))
-        {
             StartCoroutine("Eaten");
         }
     }*/
@@ -193,7 +180,9 @@ public class GhostRed : MonoBehaviour {
     }
     IEnumerator Eaten()
     {
-        transform.GetChild(0).gameObject.tag = "EatenIjike";
+        Destroy(gameObject);
+        yield return null;
+        /*transform.GetChild(0).gameObject.tag = "EatenIjike";
         this.gameObject.tag = "EatenIjike";
         gameObject.layer = LayerMask.NameToLayer("EatenIjike");
         transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("EatenIjike");
@@ -209,7 +198,7 @@ public class GhostRed : MonoBehaviour {
             count--;
         }
         yield return new WaitForSeconds(0.2f);
-        speed = 7f;
+        speed = 5f;
         collider.isTrigger = false;
         this.gameObject.tag = "Enemy";
         transform.GetChild(0).gameObject.tag = "Enemy";
@@ -217,6 +206,7 @@ public class GhostRed : MonoBehaviour {
         transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Enemy");
         transform.GetChild(0).gameObject.GetComponent<Renderer>().material.color = new Color(255f, 0f, 0f);
         ijikeTime = 7.0f;
+        */
     }
 
 

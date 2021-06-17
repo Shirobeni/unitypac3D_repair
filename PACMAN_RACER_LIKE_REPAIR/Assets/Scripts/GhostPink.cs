@@ -6,56 +6,30 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 
-public class GhostPink : MonoBehaviour
+public class GhostPink : BaseGhost
 {
-    protected float speed = 7f;
-
-    private Vector3 enemypos;
-    protected Rigidbody rigidbody;
-    private Vector3 playerPos;
-    private GameObject player;
-    protected NavMeshAgent m_navMeshAgent;
-    protected Transform target;
-    private float distance;
-    public bool tracking = false;
-
-    public float moveSpeed { set; get; }
-    public bool ijike = false;
-    public float ijikeTime;
-    public int destinationIndex = 0;
     public Transform[] navPointsObj;
-    private new Collider collider;
-    public GhostS ghostS;
 
 
 
     // Use this for initialization
-    void Start()
+    protected override void Start()
     {
-        ghostS.limitRange = 30f;
-        ghostS.quitRange = 40f;
-        tracking = false;
-        m_navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        base.Start();
         m_navMeshAgent.autoBraking = false;
-        rigidbody = GetComponent<Rigidbody>();
-        ijikeTime = 0f;
         GetNextPoint();
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        //moveSpeed = speed;
+        //m_navMeshAgent.speed = moveSpeed;
+        base.Update();
         enemypos = this.transform.position;
-        //renderer = GetComponent<Renderer>();
         player = GameObject.FindWithTag("Player");
         playerPos = player.transform.position;
         distance = Vector3.Distance(enemypos, playerPos);
-        moveSpeed = speed;
-        m_navMeshAgent.speed = moveSpeed;
-        /*if(navPointsObj.Length == 0)
-        {
-            return;
-        }*/
         rigidbody.velocity = m_navMeshAgent.desiredVelocity;
         if (tracking)
         {
@@ -116,7 +90,7 @@ public class GhostPink : MonoBehaviour
 
     }
 
-    public void beIjike()
+    /*public void beIjike()
     {
         ijikeTime = 0f;
         transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Ijike");
@@ -125,32 +99,7 @@ public class GhostPink : MonoBehaviour
         ijike = true;
         this.gameObject.tag = "Ijike";
         transform.GetChild(0).gameObject.tag = "Ijike";
-        //ijikeTime += Time.deltaTime;
-        /*if(ijikeTime > 7.0f)
-        {
-            ijike = false;
-            gameObject.GetComponent<Renderer>().material.color = new Color(241f, 1f, 1f);
-        }*/
-        /*
-        Destroy(gameObject);
-        Instantiate(ijikeGhost, transform.position, transform.rotation);
-        */
-    }
-    /*void OnTriggerEnter(Collider collision)
-    {
-        if ((collision.gameObject.tag == "Player") && (this.gameObject.tag == "Ijike"))
-        {
-            StartCoroutine("Eaten");
-        }
     }*/
-    void OnCollisionEnter(Collision collision)
-    {
-        if ((collision.gameObject.tag == "Player") && (this.gameObject.tag == "Ijike"))
-        {
-            speed = 0f;
-            StartCoroutine("Eaten");
-        }
-    }
     void OnDrawGizmos()
     {
         if (m_navMeshAgent && m_navMeshAgent.enabled)
@@ -187,13 +136,15 @@ public class GhostPink : MonoBehaviour
     }
     IEnumerator Eaten()
     {
-        this.gameObject.tag = "EatenIjike";
+        Destroy(gameObject);
+        yield return null;
+        /*this.gameObject.tag = "EatenIjike";
         transform.GetChild(0).gameObject.tag = "EatenIjike";
         gameObject.layer = LayerMask.NameToLayer("EatenIjike");
         transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("EatenIjike");
         int count = 10;
         collider = transform.GetChild(0).GetComponent<Collider>();
-        collider.isTrigger = true;
+        GetComponent<Collider>().isTrigger = true;
         while (count > 0)
         {
             transform.GetChild(0).gameObject.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 1);
@@ -202,12 +153,13 @@ public class GhostPink : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             count--;
         }
-        collider.isTrigger = false;
-        speed = 7f;
+        GetComponent<Collider>().isTrigger = false;
+        speed = 5f;
         this.gameObject.tag = "Enemy";
         transform.GetChild(0).gameObject.tag = "Enemy";
         gameObject.layer = LayerMask.NameToLayer("Enemy");
         transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Enemy");
         ijikeTime = 7.0f;
+        */
     }
 }

@@ -116,7 +116,20 @@ public class GameStage : MonoBehaviour
             rivalSet = GameObject.FindWithTag("RivalSet");
             rivalArea = rivalSet.GetComponent<RivalArea>();
             SceneChange();
-
+        }
+        if (SceneManager.GetActiveScene().name == "Goal")
+        {
+            playerSet = GameObject.FindWithTag("PlayerSet");
+            startArea = playerSet.GetComponent<StartArea>();
+            rivalSet = GameObject.FindWithTag("RivalSet");
+            rivalArea = rivalSet.GetComponent<RivalArea>();
+            if((startArea.readyFlag == true) && (rivalArea == true))
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    LoadScene();
+                }
+            }
         }
 
     }
@@ -130,10 +143,13 @@ public class GameStage : MonoBehaviour
         {
             SceneManager.LoadScene("Stage1");
         }
-        if ((SceneManager.GetActiveScene().name == "Stage1") || (SceneManager.GetActiveScene().name == "Stage2") ||
-            (SceneManager.GetActiveScene().name == "Stage3"))
+        if ((SceneManager.GetActiveScene().name == "Stage1") || (SceneManager.GetActiveScene().name == "Stage2"))
         {
             SceneManager.LoadScene("Clear");
+        }
+        if (SceneManager.GetActiveScene().name == "Stage3")
+        {
+            SceneManager.LoadScene("Goal");
         }
         if (SceneManager.GetActiveScene().name == "Clear")
         {
@@ -146,6 +162,12 @@ public class GameStage : MonoBehaviour
                 SceneManager.LoadScene("Stage3");
             }
         }
+        if(SceneManager.GetActiveScene().name == "Goal")
+        {
+            SceneManager.LoadScene("Title");
+        }
+        
+
     }
 
     public void SceneChange()

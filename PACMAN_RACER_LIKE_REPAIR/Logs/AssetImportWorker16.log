@@ -1,0 +1,21 @@
+Using pre-set license
+Built from '2021.1/staging' branch; Version is '2021.1.5f1 (3737af19df53) revision 3618735'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 19041.985; Version 2004; 64bit' Language: 'ja' Physical Memory: 3996 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.1.5f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker16
+-projectPath
+C:/Users/PC User/Documents/PACMAN_RACER_LIKE_REPAIR
+-logFile
+Logs/AssetImportWorker16.log
+-srvPort
+50031
+Successfully changed project path to: C:/Users/PC User/Documents/PACMAN_RACER_LIKE_REPAIR
+C:/Users/PC User/Documents/PACMAN_RACER_LIKE_REPAIR
+Using Asset Import Pipeline V2.

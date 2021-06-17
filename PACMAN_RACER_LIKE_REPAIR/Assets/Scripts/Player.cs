@@ -3,46 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    private float speed = 3.0f;
+    private float speed =  1.05f;
     private Vector3 velocity;
     private Vector3 playerpos;
     private GameObject esa;
     public GameObject playerMiss;
     private Rigidbody rigidbody;
     private GameObject mainCameraObj;
-    private new Collider collider;
     static public Player instance;
     // Use this for initialization
     void Start () {
         StartCoroutine("awaken");
-        //transform.Rotate(new Vector3(0, -90, 0));
         playerpos = GetComponent<Transform>().position;
         rigidbody = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        //esa = GameObject.FindGameObjectWithTag("Esa");
         velocity = Vector3.zero;
         Vector2 diff = transform.position - playerpos;
         if (((Input.GetKey(KeyCode.S)) && (Input.GetKey(KeyCode.J))) || (Input.GetKey(KeyCode.UpArrow)))
         {
-            //velocity.z += 1;
             velocity = transform.forward * speed;
         }
         else if (((Input.GetKey(KeyCode.X)) && (Input.GetKey(KeyCode.N))) || (Input.GetKey(KeyCode.DownArrow)))
         {
-            //velocity.z -= 1;
             velocity = transform.forward * -speed;
 
         }
         else if (((Input.GetKey(KeyCode.X)) && (Input.GetKey(KeyCode.J))) || (Input.GetKey(KeyCode.LeftArrow)))
         {
-            transform.Rotate(new Vector3(0, -20, 0));
+            transform.Rotate(new Vector3(0, -12, 0));
         }
         else if (((Input.GetKey(KeyCode.S)) && (Input.GetKey(KeyCode.N))) ||(Input.GetKey(KeyCode.RightArrow)))
         {
-            transform.Rotate(new Vector3(0, 20, 0));
+            transform.Rotate(new Vector3(0, 12, 0));
         }
         //velocity = velocity.normalized * (speed * 2) * Time.deltaTime;
 
@@ -81,7 +76,7 @@ public class Player : MonoBehaviour {
     IEnumerator awaken()
     {
         this.gameObject.tag = "PacMiss";
-        int count = 10;
+        int count = 20;
         for (int i = 0; i < count; i++)
         {
             i++;

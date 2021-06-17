@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class RivalPlayer : MonoBehaviour
 {
-    protected float speed = 20f;
+    protected float speed = 15f;
     private Rigidbody rigidbody;
     private Vector3 playerPos;
     private Vector3 esaPos;

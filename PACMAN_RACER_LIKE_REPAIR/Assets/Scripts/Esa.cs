@@ -8,9 +8,11 @@ public class Esa : MonoBehaviour
     private GameObject enemy1;
     private GameObject enemy2;
     private GameObject enemy3;
+    private GameObject enemy4;
     private GhostRed ghostRed;
     private GhostBlue ghostBlue;
     private GhostPink ghostPink;
+    private GhostOrange ghostOrange;
     private GameObject canvasObject;
     private GameObject score1p;
     private PlayerScore playerScoreScript;
@@ -22,22 +24,35 @@ public class Esa : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        
+        score1p = GameObject.FindWithTag("1pScore");
+        playerScoreScript = score1p.GetComponent<PlayerScore>();
+        score2p = GameObject.FindWithTag("2pScore");
+        rivalScoreScript = score2p.GetComponent<RivalScore>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         enemy1 = GameObject.Find("RedGhostMain");
-        ghostRed = enemy1.GetComponent<GhostRed>();
+        if (enemy1)
+        {
+            ghostRed = enemy1.GetComponent<GhostRed>();
+        }
         enemy2 = GameObject.Find("BlueGhostMain");
-        ghostBlue = enemy2.GetComponent<GhostBlue>();
+        if (enemy2)
+        {
+            ghostBlue = enemy2.GetComponent<GhostBlue>();
+        }
         enemy3 = GameObject.Find("PinkGhostMain");
-        ghostPink = enemy3.GetComponent<GhostPink>();
-        score1p = GameObject.FindWithTag("1pScore");
-        playerScoreScript = score1p.GetComponent<PlayerScore>();
-        score2p = GameObject.FindWithTag("2pScore");
-        rivalScoreScript = score2p.GetComponent<RivalScore>();
+        if (enemy3)
+        {
+            ghostPink = enemy3.GetComponent<GhostPink>();
+        }
+        enemy4 = GameObject.Find("OrangeGhostMain");
+        if (enemy4) {
+            ghostOrange = enemy4.GetComponent<GhostOrange>();
+        }
         transform.Rotate(new Vector3(0, 5, 0));
     }
     void OnCollisionEnter(Collision collision)
@@ -50,6 +65,7 @@ public class Esa : MonoBehaviour
                 ghostRed.beIjike();
                 ghostBlue.beIjike();
                 ghostPink.beIjike();
+                ghostOrange.beIjike();
             }
             if (collision.gameObject.name == "PacmanMain")
             {
